@@ -1,7 +1,8 @@
-<h1>
-    Hello i am a template
-</h1>
+@extends('layouts.app')
 
+@section('title', "Hello i am a template")
+
+@section('content')
 <div>
     @if (count($tasks))
         @foreach ($tasks as $task)
@@ -13,3 +14,4 @@
         <div>There is no task present in the database</div>
     @endif
 </div>
+@endsection
