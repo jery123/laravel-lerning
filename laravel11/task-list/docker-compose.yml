@@ -9,7 +9,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
     ports:
-      - 3306:3306
+      - 3309:3306 # host:container
   adminer:
     image: adminer
     restart: always
