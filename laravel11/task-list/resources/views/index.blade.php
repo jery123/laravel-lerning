@@ -14,4 +14,10 @@
         <div>There is no task present in the database</div>
     @endif
 </div>
+
+@if ($tasks->count())
+    <nav>
+        {{ $tasks->links() }}
+    </nav>
+@endif
 @endsection
