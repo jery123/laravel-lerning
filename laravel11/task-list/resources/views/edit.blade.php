@@ -6,24 +6,24 @@
     <style>
         .error-message{
            color:red;
-           font-size: 0, 8rem; 
+           font-size: 0, 8rem;
         }
     </style>
 @endsection
 
 @section('content')
 
-<form action="{{ route('tasks.update', ['id'=>$task->id]) }}" method="POST">
+<form action="{{ route('tasks.update', ['task'=>$task->id]) }}" method="POST">
     @csrf
     @method('PUT')
     <div>
         <label for="title">Title</label>
-        <input name="title" id="title" value="{{ $task->title }}"> 
+        <input name="title" id="title" value="{{ $task->title }}">
         @error('title')
             <p class="error-message">{{ $message }}</p>
         @enderror
     </div>
-        
+
     <div>
         <label for="description">Description</label>
         <textarea name="description" id="description">
@@ -43,7 +43,7 @@
             <p class="error-message">{{ $message }}</p>
         @enderror
     </div>
-        
+
     <div>
         <input type="submit" value="Edit Task">
     </div>
