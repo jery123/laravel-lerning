@@ -41,7 +41,8 @@
             </div>
             <div>
               <div class="book-rating">
-                {{ number_format($book->reviews_avg_rating, 1) }}
+                {{-- {{ number_format($book->reviews_avg_rating, 1) }} --}}
+                <x-start-rating :rating="$book->reviews_avg_rating" />
                 {{-- <x-star-rating :rating="$book->reviews_avg_rating" /> --}}
               </div>
               <div class="book-review-count">
