@@ -19,7 +19,9 @@ class AttendeeController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:sanctum')->except(['index', 'show']);
+        $this->middleware('auth:sanctum')->except(['index', 'show', 'update']);
+        $this->middleware('throttle:60,1')
+                ->only(['store', 'update', 'destroy']); // ==> 60 requests in the space of 1 minute
         $this->authorizeResource(Attendee::class, 'attendee');
     }
     /**
@@ -40,7 +42,7 @@ class AttendeeController extends Controller
     public function store(Request $request, Event $event)
     {
         $attendee = $this->loadRelationships($event->attendees()->create([
-            'user_id' => 1
+            'user_id' => $request->user()->id
         ]));
 
         return new AttendeeResource($attendee);
