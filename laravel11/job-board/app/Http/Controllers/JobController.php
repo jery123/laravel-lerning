@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Job;
 use Illuminate\Http\Request;
 
 class JobController extends Controller
@@ -11,7 +12,30 @@ class JobController extends Controller
      */
     public function index()
     {
-        //
+        $jobs = Job::query();
+
+        $jobs->when(request('search'), function ($query) {
+                $query->where(function ($query) {
+                    $query->where('title', 'like', '%'.request('search').'%')
+                        ->orWhere('description', 'like', '%'.request('search').'%');
+                });
+            })
+            ->when(request('min_salary'), function ($query) {
+                $query->where('salary', '>=', request('min_salary'));
+            })
+            ->when(request('max_salary'), function ($query) {
+                $query->where('salary', '<=', request('max_salary'));
+            })
+            ->when(request('experience'), function($query){
+                $query->where('experience', request('experience'));
+            })
+            ->when(request('category'), function($query){
+                $query->where('category', request('category'));
+            });
+
+        $jobs = $jobs->get();
+
+        return view('job.index', ['jobs' => $jobs]);
     }
 
     /**
@@ -33,9 +57,9 @@ class JobController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Job $job)
     {
-        //
+        return view('job.show', ['job' => $job]);
     }
 
     /**
