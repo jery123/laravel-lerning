@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Employer;
 use App\Models\Job;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->string('location');
             $table->string('category');
             $table->enum('experience', Job::$experience);
+            $table->foreignIdFor(Employer::class)->constrained();
 
             $table->timestamps();
         });
