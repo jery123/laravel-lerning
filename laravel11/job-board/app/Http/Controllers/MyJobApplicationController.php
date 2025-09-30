@@ -18,19 +18,20 @@ class MyJobApplicationController extends Controller
                 'applications' => auth()->user()->jobApplications()
                     ->with([
                         'job' => fn($query) => $query->withCount('jobApplications')
-                                        ->withAvg('jobApplications', 'expected_salary'),
+                                        ->withAvg('jobApplications', 'expected_salary')
+                                        ->withTrashed(),
                         'job.employer'])
                     ->latest()->get()
             ]
         );
     }
- 
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(JobApplication $myJobApplication)
     {
-        $myJobApplication->delete(); 
+        $myJobApplication->delete();
 
         return redirect()->back()->with('success', "Job application removed.");
     }
