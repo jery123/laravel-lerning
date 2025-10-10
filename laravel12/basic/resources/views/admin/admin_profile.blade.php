@@ -2,6 +2,7 @@
 
 @section('admin')
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <div class="content">
 
@@ -23,7 +24,7 @@
 
                             <div class="align-items-center">
                                 <div class="d-flex align-items-center">
-                                    <img src="{{(!empty($profileData->photo)) ? url('upload/user_images' . $profileData->photo) : url('upload/no_image.jpg') }}"
+                                    <img src="{{(!empty($profileData->photo)) ? url('upload/user_images/' . $profileData->photo) : url('upload/no_image.jpg') }}"
                                         class="rounded-circle avatar-xxl img-thumbnail float-start" alt="image profile">
 
                                     <div class="overflow-hidden ms-4">
@@ -47,7 +48,8 @@
                                                         </div><!--end col-->
                                                     </div>
                                                 </div>
-                                            <form action="">
+                                            <form action="{{ route('profile.store') }}" method="post" enctype="multipart/form-data">
+                                                @csrf
                                                 <div class="card-body">
                                                     <div class="form-group mb-3 row">
                                                         <label class="form-label">Name</label>
@@ -82,14 +84,14 @@
                                                     <div class="form-group mb-3 row">
                                                         <label class="form-label">Profile Photo</label>
                                                         <div class="col-lg-12 col-xl-12">
-                                                            <input class="form-control" type="file" name="photo">
+                                                            <input class="form-control" type="file" name="photo" id="image">
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group mb-3 row">
                                                         <div class="col-lg-12 col-xl-12">
-                                                            <img src="{{(!empty($profileData->photo)) ? url('upload/user_images' . $profileData->photo) : url('upload/no_image.jpg') }}"
-                                                                    class="rounded-circle avatar-xxl img-thumbnail float-start" alt="image profile">
+                                                            <img src="{{(!empty($profileData->photo)) ? url('upload/user_images/' . $profileData->photo) : url('upload/no_image.jpg') }}"
+                                                                    class="rounded-circle avatar-xxl img-thumbnail float-start" alt="image profile" id="showImage">
                                                         </div>
                                                     </div>
 
@@ -109,13 +111,16 @@
                                                         </div><!--end col-->
                                                     </div>
                                                 </div>
-
+<form action="" method="POST">
                                                 <div class="card-body mb-0">
                                                     <div class="form-group mb-3 row">
-                                                        <label class="form-label">Old Password</label>
+                                                        <label class="form-label" name="old_password" id="old_password">Old Password</label>
                                                         <div class="col-lg-12 col-xl-12">
-                                                            <input class="form-control" type="password"
+                                                            <input class="form-control @error('old_password') is-invalid @enderror" type="password"
                                                                 placeholder="Old Password">
+                                                                @error('old_password')
+                                                                    <spn class="text-danger">{{ $message }}</spn>
+                                                                @enderror
                                                         </div>
                                                     </div>
                                                     <div class="form-group mb-3 row">
@@ -142,6 +147,7 @@
                                                     </div>
 
                                                 </div><!--end card-body-->
+                                                </form>
                                             </div>
                                         </div>
 
@@ -153,4 +159,15 @@
                 </div>
 
 
+                <script type="text/javascript">
+                    $(document).ready(function(){
+                        $('#image').change(function(e){
+                            var reader = new FileReader();
+                            reader.onload = function(e){
+                                $('#showImage').attr('src', e.target.result);
+                            }
+                            reader.readAsDataURL(e.target.files['0']);
+                        })
+                    })
+                </script>
 @endsection
