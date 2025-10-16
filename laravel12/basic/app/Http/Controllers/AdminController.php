@@ -131,11 +131,14 @@ class AdminController extends Controller
         User::whereId($user->id)->update([
             'password' => Hash::make($request->new_password)
         ]);
-        $notification = array([
+
+        Auth::logout();
+
+        $notification = array(
             'message' => 'Password Updated Successfully',
             'alert-type' => 'success'
-        ]);
+        );
 
-            return redirect()->route('login')->with($notification);
+        return redirect()->route('login')->with($notification);
     }
 }
