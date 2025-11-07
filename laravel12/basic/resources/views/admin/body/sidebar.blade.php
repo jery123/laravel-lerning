@@ -39,16 +39,16 @@
     <li>
         <a href="#sidebarAuth" data-bs-toggle="collapse">
             <i data-feather="users"></i>
-            <span> Authentication </span>
+            <span> Review Setup </span>
             <span class="menu-arrow"></span>
         </a>
         <div class="collapse" id="sidebarAuth">
             <ul class="nav-second-level">
                 <li>
-                    <a href="auth-login.html" class="tp-link">Log In</a>
+                    <a href="{{ route('all.review') }}" class="tp-link">All Review</a>
                 </li>
                 <li>
-                    <a href="auth-register.html" class="tp-link">Register</a>
+                    <a href="{{ route('add.review') }}" class="tp-link">Add Review</a>
                 </li>
             </ul>
         </div>
@@ -57,17 +57,14 @@
     <li>
         <a href="#sidebarError" data-bs-toggle="collapse">
             <i data-feather="alert-octagon"></i>
-            <span> Error Pages </span>
+            <span> Slider Setup </span>
             <span class="menu-arrow"></span>
         </a>
         <div class="collapse" id="sidebarError">
             <ul class="nav-second-level">
                 <li>
-                    <a href="error-404.html" class="tp-link">Error 404</a>
-                </li>
-                <li>
-                    <a href="error-500.html" class="tp-link">Error 500</a>
-                </li>
+                    <a href="{{ route('get.slider') }}" class="tp-link">Get Slider</a>
+                </li> 
             </ul>
         </div>
     </li>
