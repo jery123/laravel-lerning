@@ -69,6 +69,24 @@
         </div>
     </li>
 
+    <li>
+        <a href="#Features" data-bs-toggle="collapse">
+            <i data-feather="alert-octagon"></i>
+            <span> Features Setup </span>
+            <span class="menu-arrow"></span>
+        </a>
+        <div class="collapse" id="Features">
+            <ul class="nav-second-level">
+                <li>
+                    <a href="{{ route('all.features') }}" class="tp-link">All Features</a>
+                </li> 
+                <li>
+                    <a href="{{ route('add.feature') }}" class="tp-link">Add Feature</a>
+                </li> 
+            </ul>
+        </div>
+    </li>
+
 
     <li class="menu-title mt-2">General</li>
 

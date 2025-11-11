@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\HomeController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Backend\ReviewController;
@@ -54,6 +55,16 @@ Route::middleware('auth')->group(function () {
         Route::post('edit-slider/{id}', 'EditSlider');
         Route::post('edit-features/{id}', 'EditFeatures');
         Route::post('edit-reviews/{id}', 'EditReviews');
+        Route::post('edit-answers/{id}', 'EditAnswers');
+    });
+
+    Route::controller(HomeController::class)->group(function(){
+        Route::get('all/features', 'AllFeatures')->name('all.features');
+        Route::get('add/feature', 'AddFeature')->name('add.feature');
+        Route::post('store/feature', 'StoreFeature')->name('store.feature');
+        Route::get('edit/review/{id}', 'EditReview')->name('edit.review');
+        Route::post('update/review', 'UpdateReview')->name('update.review');
+        Route::get('delete/review/{id}', 'DeleteReview')->name('delete.review');
     });
 
 });
