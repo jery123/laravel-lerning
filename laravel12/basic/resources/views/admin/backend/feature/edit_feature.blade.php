@@ -11,7 +11,7 @@
 
             <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                 <div class="flex-grow-1">
-                    <h4 class="fs-18 fw-semibold m-0">Add Feature</h4>
+                    <h4 class="fs-18 fw-semibold m-0">Edit Feature</h4>
                 </div>
             </div>
 
@@ -29,27 +29,28 @@
                                         <div class="col-lg-12 col-xl-12">
                                             <div class="card border mb-0">
 
-                                            <form action="{{ route('store.feature') }}" method="post" enctype="multipart/form-data">
+                                            <form action="{{ route('update.feature') }}" method="post" enctype="multipart/form-data">
                                                 @csrf
+                                                <input type="hidden" name="id" value="{{ $feature->id }}">
                                                 <div class="card-body">
                                                     <div class="form-group mb-3 row">
                                                         <label class="form-label">Title</label>
                                                         <div class="col-lg-12 col-xl-12">
-                                                            <input class="form-control" type="text" name="title" >
+                                                            <input class="form-control" type="text" name="title" value="{{ $feature->title }}" >
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group mb-3 row">
                                                         <label class="form-label">Icon</label>
                                                         <div class="col-lg-12 col-xl-12">
-                                                            <input class="form-control" type="text" name="icon">
+                                                            <input class="form-control" type="text" name="icon" value="{{ $feature->icon }}">
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group mb-3 row">
                                                         <label class="form-label">Description</label>
                                                         <div class="col-lg-12 col-xl-12">
-                                                            <textarea name="description" class="form-control"></textarea>
+                                                            <textarea name="description" class="form-control">{{ $feature->description }}</textarea>
                                                         </div>
                                                     </div>
 
@@ -67,5 +68,5 @@
                     </div>
                 </div>
 
-
 @endsection
+

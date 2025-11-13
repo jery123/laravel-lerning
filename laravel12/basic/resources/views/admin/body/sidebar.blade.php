@@ -64,7 +64,7 @@
             <ul class="nav-second-level">
                 <li>
                     <a href="{{ route('get.slider') }}" class="tp-link">Get Slider</a>
-                </li> 
+                </li>
             </ul>
         </div>
     </li>
@@ -79,14 +79,60 @@
             <ul class="nav-second-level">
                 <li>
                     <a href="{{ route('all.features') }}" class="tp-link">All Features</a>
-                </li> 
+                </li>
                 <li>
                     <a href="{{ route('add.feature') }}" class="tp-link">Add Feature</a>
-                </li> 
+                </li>
             </ul>
         </div>
     </li>
 
+    <li>
+        <a href="#sidebarError" data-bs-toggle="collapse">
+            <i data-feather="alert-octagon"></i>
+            <span> Clarify Setup </span>
+            <span class="menu-arrow"></span>
+        </a>
+        <div class="collapse" id="sidebarError">
+            <ul class="nav-second-level">
+                <li>
+                    <a href="{{ route('get.clarifies') }}" class="tp-link">Get Clarify</a>
+                </li>
+            </ul>
+        </div>
+    </li>
+
+
+    <li>
+        <a href="#sidebarError" data-bs-toggle="collapse">
+            <i data-feather="alert-octagon"></i>
+            <span> Financial Setup </span>
+            <span class="menu-arrow"></span>
+        </a>
+        <div class="collapse" id="sidebarError">
+            <ul class="nav-second-level">
+                <li>
+                    <a href="{{ route('get.financial') }}" class="tp-link">Get Financial</a>
+                </li>
+            </ul>
+        </div>
+    </li>
+
+
+    <li>
+        <a href="#sidebarError" data-bs-toggle="collapse">
+            <i data-feather="alert-octagon"></i>
+            <span> Usability Setup </span>
+            <span class="menu-arrow"></span>
+        </a>
+        <div class="collapse" id="sidebarError">
+            <ul class="nav-second-level">
+                <li>
+                    <a href="{{ route('get.usability') }}" class="tp-link">Get Usability</a>
+                </li>
+            </ul>
+        </div>
+    </li>
 
     <li class="menu-title mt-2">General</li>
 

@@ -70,7 +70,7 @@
 
     @php
         $id = Auth::user()->id;
-        $user = App\Models\User::find($id);
+        $profileData = App\Models\User::find($id);
     @endphp
 
     <li class="dropdown notification-list topbar-dropdown">

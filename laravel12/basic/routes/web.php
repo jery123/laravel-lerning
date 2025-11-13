@@ -62,9 +62,25 @@ Route::middleware('auth')->group(function () {
         Route::get('all/features', 'AllFeatures')->name('all.features');
         Route::get('add/feature', 'AddFeature')->name('add.feature');
         Route::post('store/feature', 'StoreFeature')->name('store.feature');
-        Route::get('edit/review/{id}', 'EditReview')->name('edit.review');
-        Route::post('update/review', 'UpdateReview')->name('update.review');
-        Route::get('delete/review/{id}', 'DeleteReview')->name('delete.review');
+        Route::get('edit/feature/{id}', 'EditFeature')->name('edit.feature');
+        Route::post('update/feature', 'UpdateFeature')->name('update.feature');
+        Route::get('delete/feature/{id}', 'DeleteFeature')->name('delete.feature');
     });
 
+    Route::controller(HomeController::class)->group(function(){
+        Route::get('all/clarifies', 'GetClarifies')->name('get.clarifies');
+        Route::post('update/clarify', 'UpdateClarify')->name('update.clarify');
+    });
+
+    // Financial Section
+    Route::controller(HomeController::class)->group(function(){
+        Route::get('all/financial', 'GetFinancial')->name('get.financial');
+        Route::post('update/financial', 'UpdateFinancial')->name('update.financial');
+    });
+
+    // Usability Section
+    Route::controller(HomeController::class)->group(function(){
+        Route::get('all/usability', 'GetUsability')->name('get.usability');
+        Route::post('update/usability', 'UpdateUsability')->name('update.usability');
+    });
 });
