@@ -30,21 +30,29 @@
           </div>
         </div>
       </div>
+      @php
+          $connects = App\Models\Connect::limit(3)->get();
+      @endphp
       <div class="row">
+        @foreach ($connects as $connect)
         <div class="col-xl-4 col-md-6">
           <div class="lonyo-process-wrap" data-aos="fade-up" data-aos-duration="500">
             <div class="lonyo-process-number">
-              <img src="{{ asset('frontend/assets/images/v1/n1.svg')}}" alt="">
+              <img src="{{ asset('frontend/assets/images/v1/n'. $connect->id .'.svg')}}" alt="">
             </div>
             <div class="lonyo-process-title">
-              <h4>Connect Your Accounts</h4>
+              <h4 class="connect-title" contenteditable="{{ auth()->user() ? 'true' : 'false' }}"
+                data-id="{{ $connect->id }}">{{ $connect->title }}</h4>
             </div>
             <div class="lonyo-process-data">
-              <p>Link your bank, credit card or investment accounts to automatically track transactions and get a complete financial overview</p>
+              <p class="connect-description" contenteditable="{{ auth()->user() ? 'true' : 'false' }}"
+                data-id="{{ $connect->id }}">{{ $connect->description }}</p>
             </div>
           </div>
         </div>
-        <div class="col-xl-4 col-md-6">
+        @endforeach
+
+        {{-- <div class="col-xl-4 col-md-6">
           <div class="lonyo-process-wrap" data-aos="fade-up" data-aos-duration="700">
             <div class="lonyo-process-number">
               <img src="{{ asset('frontend/assets/images/v1/n2.svg')}}" alt="">
@@ -69,8 +77,53 @@
               <p>Check your financial dashboard for regular updates and set up automatic payments or savings to simplify management.</p>
             </div>
           </div>
-        </div>
+        </div> --}}
         <div class="border-bottom" data-aos="fade-up" data-aos-duration="500"></div>
       </div>
     </div>
   </div>
+
+{{-- CSRF Token --}}
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        function saveChanges(element) {
+            let connectId = element.dataset.id;
+            let field = element.classList.contains("connect-title") ? "title" : "description";
+            let newValue = element.innerText.trim();
+            console.log(newValue)
+
+            fetch(`/update-connect/${connectId }`, {
+                method: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    [field]: newValue
+                })
+            }).then(response => response.json())
+                .then((data) => {
+                    console.log(`${field} updated successfully`);
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        // Auto save on enter Key
+        document.addEventListener("keydown", function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                saveChanges(e.target);
+            }
+        })
+
+        // Auto save on losing focus
+        document.querySelectorAll(".connect-title, .connect-description").forEach(el => {
+            el.addEventListener("blur", function() {
+                saveChanges(el);
+            }); 
+        });
+    });
+</script>

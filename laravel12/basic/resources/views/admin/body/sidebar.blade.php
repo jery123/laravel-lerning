@@ -88,12 +88,12 @@
     </li>
 
     <li>
-        <a href="#sidebarError" data-bs-toggle="collapse">
+        <a href="#Clarify" data-bs-toggle="collapse">
             <i data-feather="alert-octagon"></i>
             <span> Clarify Setup </span>
             <span class="menu-arrow"></span>
         </a>
-        <div class="collapse" id="sidebarError">
+        <div class="collapse" id="Clarify">
             <ul class="nav-second-level">
                 <li>
                     <a href="{{ route('get.clarifies') }}" class="tp-link">Get Clarify</a>
@@ -104,12 +104,12 @@
 
 
     <li>
-        <a href="#sidebarError" data-bs-toggle="collapse">
+        <a href="#Financial" data-bs-toggle="collapse">
             <i data-feather="alert-octagon"></i>
             <span> Financial Setup </span>
             <span class="menu-arrow"></span>
         </a>
-        <div class="collapse" id="sidebarError">
+        <div class="collapse" id="Financial">
             <ul class="nav-second-level">
                 <li>
                     <a href="{{ route('get.financial') }}" class="tp-link">Get Financial</a>
@@ -120,15 +120,50 @@
 
 
     <li>
-        <a href="#sidebarError" data-bs-toggle="collapse">
+        <a href="#Usability" data-bs-toggle="collapse">
             <i data-feather="alert-octagon"></i>
             <span> Usability Setup </span>
             <span class="menu-arrow"></span>
         </a>
-        <div class="collapse" id="sidebarError">
+        <div class="collapse" id="Usability">
             <ul class="nav-second-level">
                 <li>
                     <a href="{{ route('get.usability') }}" class="tp-link">Get Usability</a>
+                </li>
+            </ul>
+        </div>
+    </li>
+
+    <li>
+        <a href="#Connect" data-bs-toggle="collapse">
+            <i data-feather="alert-octagon"></i>
+            <span> Connect Setup </span>
+            <span class="menu-arrow"></span>
+        </a>
+        <div class="collapse" id="Connect">
+            <ul class="nav-second-level">
+                <li>
+                    <a href="{{ route('get.connects') }}" class="tp-link">Get Connect</a>
+                </li>
+                <li>
+                    <a href="{{ route('add.connect') }}" class="tp-link">Add Connect</a>
+                </li>
+            </ul>
+        </div>
+    </li>
+    <li>
+        <a href="#Faq" data-bs-toggle="collapse">
+            <i data-feather="alert-octagon"></i>
+            <span> Faq Setup </span>
+            <span class="menu-arrow"></span>
+        </a>
+        <div class="collapse" id="Faq">
+            <ul class="nav-second-level">
+                <li>
+                    <a href="{{ route('get.faqs') }}" class="tp-link">Get Faq</a>
+                </li>
+                <li>
+                    <a href="{{ route('add.faq') }}" class="tp-link">Add Faq</a>
                 </li>
             </ul>
         </div>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Clarify;
+use App\Models\Connect;
+use App\Models\Faq;
 use App\Models\Feature;
 use App\Models\Financial;
 use App\Models\Usability;
@@ -232,4 +234,90 @@ class HomeController extends Controller
         }
 
     }
+
+    /**
+     * Connect
+     */
+    public function GetConnect(){
+        $connects = Connect::latest()->get();
+        return view('admin.backend.connect.all_connect', compact('connects'));
+    }
+    public function AddConnect(){
+        return view('admin.backend.connect.add_connect');
+    }
+    public function StoreConnect(Request $request){
+        Connect::create([
+            'title' => $request->title,
+            'description' => $request->description,
+        ]);
+
+        $notif = array(
+            'message' => 'Connect Added Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('get.connects')->with($notif);
+    }
+    public function EditConnect($id){
+        $connect = Connect::find($id);
+        return view('admin.backend.connect.edit_connect', compact('connect'));
+    }
+    public function UpdateConnect(Request $request){
+        $connect_id = $request->id;
+        $connect = Connect::find($connect_id);
+
+        $connect->update([
+            'title' => $request->title,
+            'description' => $request->description,
+        ]);
+
+        $notif = array (
+            'message' => 'Connect updated successfully!',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('get.connects')->with($notif);
+    }
+    public function DeleteConnect($id){
+        Connect::find($id)->delete();
+
+        $notif = array(
+            'message' => 'Connect deleted successfully!',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notif);
+    }
+    public function ModifyConnect(Request $request, $id){
+        $connect = Connect::findOrFail($id);
+        
+        $connect->update($request->only(['title', 'description']));
+        return response()->json(['success'=>true, 'message'=>'Updated successfully']);
+    }
+    /**End Connect */
+
+    /**
+     * Faq Section
+     */
+    public function GetFaqs(){
+        $faqs = Faq::latest()->get();
+
+        return view('admin.backend.faqs.get_faqs', compact('faqs'));
+    }
+    public function AddFaq(){
+        return view('admin.backend.faqs.add_faq');
+    }
+    public function StoreFaq(Request $request){
+        Faq::create([
+            'title'=>$request->title,
+            'description'=>$request->description
+        ]);
+
+        $notif = array(
+            'message'=> 'Faq added successfully!',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('get.faqs')->with($notif);
+    }
+    /**End Faq */
 }

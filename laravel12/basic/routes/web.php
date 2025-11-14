@@ -83,4 +83,26 @@ Route::middleware('auth')->group(function () {
         Route::get('all/usability', 'GetUsability')->name('get.usability');
         Route::post('update/usability', 'UpdateUsability')->name('update.usability');
     });
+
+    // Connect Section
+    Route::controller(HomeController::class)->group(function(){
+        Route::get('all/connects', 'GetConnect')->name('get.connects');
+        Route::get('add/connect', 'AddConnect')->name('add.connect');
+        Route::post('store/connect', 'StoreConnect')->name('store.connect');
+        Route::get('edit/connect/{id}', 'EditConnect')->name('edit.connect');
+        Route::post('update/connect', 'UpdateConnect')->name('update.connect');
+        Route::get('delete/connect/{id}', 'DeleteConnect')->name('delete.connect');
+        Route::post('/update-connect/{id}', 'ModifyConnect');
+    });
+    
+    // Faq Section
+    Route::controller(HomeController::class)->group(function(){
+        Route::get('all/faqs', 'GetFaqs')->name('get.faqs');
+        Route::get('add/faq', 'AddFaq')->name('add.faq');
+        Route::post('store/faq', 'StoreFaq')->name('store.faq');
+        Route::get('edit/connect/{id}', 'EditConnect')->name('edit.connect');
+        Route::post('update/connect', 'UpdateConnect')->name('update.connect');
+        Route::get('delete/connect/{id}', 'DeleteConnect')->name('delete.connect');
+        Route::post('/update-connect/{id}', 'ModifyConnect');
+    });
 });
