@@ -94,15 +94,21 @@ Route::middleware('auth')->group(function () {
         Route::get('delete/connect/{id}', 'DeleteConnect')->name('delete.connect');
         Route::post('/update-connect/{id}', 'ModifyConnect');
     });
-    
+
     // Faq Section
     Route::controller(HomeController::class)->group(function(){
         Route::get('all/faqs', 'GetFaqs')->name('get.faqs');
         Route::get('add/faq', 'AddFaq')->name('add.faq');
         Route::post('store/faq', 'StoreFaq')->name('store.faq');
-        Route::get('edit/connect/{id}', 'EditConnect')->name('edit.connect');
-        Route::post('update/connect', 'UpdateConnect')->name('update.connect');
-        Route::get('delete/connect/{id}', 'DeleteConnect')->name('delete.connect');
-        Route::post('/update-connect/{id}', 'ModifyConnect');
+        Route::get('edit/faq/{id}', 'EditFaq')->name('edit.faq');
+        Route::post('update/faq', 'UpdateFaq')->name('update.faq');
+        Route::get('delete/faq/{id}', 'DeleteFaq')->name('delete.faq');
+        Route::post('/update-faq/{id}', 'ModifyFaq');
+    });
+
+    // App Section
+    Route::controller(HomeController::class)->group(function(){
+        Route::post('/update-app/{id}', 'ModifyApp');
+        Route::post('/update-app-image/{id}', 'UpdateAppImage');
     });
 });

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Clarify;
 use App\Models\Connect;
 use App\Models\Faq;
+use App\Models\App;
 use App\Models\Feature;
 use App\Models\Financial;
 use App\Models\Usability;
@@ -289,7 +290,7 @@ class HomeController extends Controller
     }
     public function ModifyConnect(Request $request, $id){
         $connect = Connect::findOrFail($id);
-        
+
         $connect->update($request->only(['title', 'description']));
         return response()->json(['success'=>true, 'message'=>'Updated successfully']);
     }
@@ -319,5 +320,83 @@ class HomeController extends Controller
 
         return redirect()->route('get.faqs')->with($notif);
     }
+
+    public function EditFaq($id){
+        $faq = Faq::find($id);
+
+        return view('admin.backend.faqs.edit_faq', compact('faq'));
+    }
+
+    public function UpdateFaq(Request $request){
+        $faq = Faq::find($request->id);
+
+        $faq->update($request->only(['title', 'description']));
+
+        $notif = array(
+            'message'=>'Faq updated with success',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('get.faqs')->with($notif);
+    }
+
+    public function DeleteFaq($id){
+        Faq::find($id)->delete();
+
+        $notif = array(
+            'message'=>'Faq delete with success',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notif);
+    }
     /**End Faq */
+
+    /**
+     * App Section
+     */
+    public function ModifyApp(Request $request, $id){
+        $app = App::find($id);
+
+        $app->update($request->only(['title', 'description']));
+
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Updated successfully'
+            ]
+        );
+    }
+
+    public function UpdateAppImage(Request $request, $id){
+        $app = App::findOrFail($id);
+
+        if($request->file('image')){
+            $image = $request->file('image');
+            $manager = new ImageManager(new Driver());
+            $name_gen = hexdec(uniqid()). '.' . $image->getClientOriginalExtension();
+            $img = $manager->read($image);
+            $img->resize(306, 481)->save(public_path('upload/apps/'.$name_gen));
+            $save_url = 'upload/apps/'.$name_gen;
+
+            if(file_exists(public_path($app->image))){
+                @unlink(public_path($app->image));
+            }
+
+            $app->update([
+                'image'=>$save_url
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'image_url' => asset($save_url),
+                'message' => 'Image updated successfully',
+            ]);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => 'Image updated failed',
+        ], 400);
+    }
+    /**End App */
 }

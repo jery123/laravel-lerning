@@ -42,11 +42,11 @@
                                         <td>{{ $item->title }}</td>
                                         <td>{{ Str::limit($item->description, 50, '...') }}</td>
                                         <td>
-                                            <a href="{{ route('edit.connect', $item->id) }}" class="btn btn-success btn-sm">Edit</a>
-                                            <a href="{{ route('delete.connect', $item->id) }}" class="btn btn-danger btn-sm" id="delete">Delete</a>
+                                            <a href="{{ route('edit.faq', $item->id) }}" class="btn btn-success btn-sm">Edit</a>
+                                            <a href="{{ route('delete.faq', $item->id) }}" class="btn btn-danger btn-sm" id="delete">Delete</a>
                                         </td>
                                     </tr>
-                                    @endforeach 
+                                    @endforeach
 
                                 </tbody>
                             </table>
