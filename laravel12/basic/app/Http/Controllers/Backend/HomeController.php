@@ -10,6 +10,7 @@ use App\Models\App;
 use App\Models\Feature;
 use App\Models\Financial;
 use App\Models\Usability;
+use App\Models\Value;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
@@ -393,10 +394,73 @@ class HomeController extends Controller
                 'message' => 'Image updated successfully',
             ]);
         }
+
         return response()->json([
             'success' => false,
-            'message' => 'Image updated failed',
+            'message' => 'Image upload failed',
         ], 400);
     }
     /**End App */
+
+
+    /**
+     * Value
+     */
+    public function GetValue(){
+        $values = Value::latest()->get();
+        return view('admin.backend.value.all_value', compact('values'));
+    }
+    public function AddValue(){
+        return view('admin.backend.value.add_value');
+    }
+    public function StoreValue(Request $request){
+        Value::create([
+            'title' => $request->title,
+            'description' => $request->description,
+        ]);
+
+        $notif = array(
+            'message' => 'Value Added Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('get.values')->with($notif);
+    }
+    public function EditValue($id){
+        $value = Value::find($id);
+        return view('admin.backend.value.edit_value', compact('value'));
+    }
+    public function UpdateValue(Request $request){
+        $value_id = $request->id;
+        $value = Value::find($value_id);
+
+        $value->update([
+            'title' => $request->title,
+            'description' => $request->description,
+        ]);
+
+        $notif = array (
+            'message' => 'Value updated successfully!',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('get.values')->with($notif);
+    }
+    public function DeleteValue($id){
+        Value::find($id)->delete();
+
+        $notif = array(
+            'message' => 'Value deleted successfully!',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notif);
+    }
+    public function ModifyValue(Request $request, $id){
+        $value = Value::findOrFail($id);
+
+        $value->update($request->only(['title', 'description']));
+        return response()->json(['success'=>true, 'message'=>'Updated successfully']);
+    }
+    /**End Value */
+
 }

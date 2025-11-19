@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\HomeController;
-use App\Http\Controllers\Backend\SliderController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\ReviewController;
+use App\Http\Controllers\Backend\SliderController;
+use App\Http\Controllers\Backend\TeamController;
+use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -23,7 +26,6 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-
 Route::get('/admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
 Route::post('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
 
@@ -37,10 +39,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/password/update', [AdminController::class, 'PasswordUpdate'])->name('admin.password.update');
 });
 
-
 Route::middleware('auth')->group(function () {
 
-    Route::controller(ReviewController::class)->group(function(){
+    Route::controller(ReviewController::class)->group(function () {
         Route::get('all/review', 'AllReview')->name('all.review');
         Route::get('add/review', 'AddReview')->name('add.review');
         Route::post('store/review', 'StoreReview')->name('store.review');
@@ -49,7 +50,7 @@ Route::middleware('auth')->group(function () {
         Route::get('delete/review/{id}', 'DeleteReview')->name('delete.review');
     });
 
-    Route::controller(SliderController::class)->group(callback: function(){
+    Route::controller(SliderController::class)->group(callback: function () {
         Route::get('get/slider', 'GetSlider')->name('get.slider');
         Route::post('update/slider', 'UpdateSlider')->name('update.slider');
         Route::post('edit-slider/{id}', 'EditSlider');
@@ -58,7 +59,7 @@ Route::middleware('auth')->group(function () {
         Route::post('edit-answers/{id}', 'EditAnswers');
     });
 
-    Route::controller(HomeController::class)->group(function(){
+    Route::controller(HomeController::class)->group(function () {
         Route::get('all/features', 'AllFeatures')->name('all.features');
         Route::get('add/feature', 'AddFeature')->name('add.feature');
         Route::post('store/feature', 'StoreFeature')->name('store.feature');
@@ -67,25 +68,25 @@ Route::middleware('auth')->group(function () {
         Route::get('delete/feature/{id}', 'DeleteFeature')->name('delete.feature');
     });
 
-    Route::controller(HomeController::class)->group(function(){
+    Route::controller(HomeController::class)->group(function () {
         Route::get('all/clarifies', 'GetClarifies')->name('get.clarifies');
         Route::post('update/clarify', 'UpdateClarify')->name('update.clarify');
     });
 
     // Financial Section
-    Route::controller(HomeController::class)->group(function(){
+    Route::controller(HomeController::class)->group(function () {
         Route::get('all/financial', 'GetFinancial')->name('get.financial');
         Route::post('update/financial', 'UpdateFinancial')->name('update.financial');
     });
 
     // Usability Section
-    Route::controller(HomeController::class)->group(function(){
+    Route::controller(HomeController::class)->group(function () {
         Route::get('all/usability', 'GetUsability')->name('get.usability');
         Route::post('update/usability', 'UpdateUsability')->name('update.usability');
     });
 
     // Connect Section
-    Route::controller(HomeController::class)->group(function(){
+    Route::controller(HomeController::class)->group(function () {
         Route::get('all/connects', 'GetConnect')->name('get.connects');
         Route::get('add/connect', 'AddConnect')->name('add.connect');
         Route::post('store/connect', 'StoreConnect')->name('store.connect');
@@ -96,7 +97,7 @@ Route::middleware('auth')->group(function () {
     });
 
     // Faq Section
-    Route::controller(HomeController::class)->group(function(){
+    Route::controller(HomeController::class)->group(function () {
         Route::get('all/faqs', 'GetFaqs')->name('get.faqs');
         Route::get('add/faq', 'AddFaq')->name('add.faq');
         Route::post('store/faq', 'StoreFaq')->name('store.faq');
@@ -107,8 +108,42 @@ Route::middleware('auth')->group(function () {
     });
 
     // App Section
-    Route::controller(HomeController::class)->group(function(){
+    Route::controller(HomeController::class)->group(function () {
         Route::post('/update-app/{id}', 'ModifyApp');
         Route::post('/update-app-image/{id}', 'UpdateAppImage');
     });
+
+    Route::controller(TeamController::class)->group(function () {
+        Route::get('all/team', 'AllTeam')->name('all.team');
+        Route::get('add/team', 'AddTeam')->name('add.team');
+        Route::post('store/team', 'StoreTeam')->name('store.team');
+        Route::get('edit/team/{id}', 'EditTeam')->name('edit.team');
+        Route::post('update/team', 'UpdateTeam')->name('update.team');
+        Route::get('delete/team/{id}', 'DeleteTeam')->name('delete.team');
+    });
+
+    // Value Section
+    Route::controller(HomeController::class)->group(function () {
+        Route::get('all/values', 'GetValue')->name('get.values');
+        Route::get('add/value', 'AddValue')->name('add.value');
+        Route::post('store/value', 'StoreValue')->name('store.value');
+        Route::get('edit/value/{id}', 'EditValue')->name('edit.value');
+        Route::post('update/value', 'UpdateValue')->name('update.value');
+        Route::get('delete/value/{id}', 'DeleteValue')->name('delete.value');
+        Route::post('/update-value/{id}', 'ModifyValue');
+    });
+
+    Route::controller(FrontendController::class)->group(function(){
+        Route::get('/get/abouts', 'GetAboutUs')->name('get.abouts');
+        Route::post('/update/abouts', 'UpdateAboutUs')->name('update.about');
+    });
+
+    Route::controller(BlogController::class)->group(function() {
+        Route::get('/blog/category', 'BlogCategory')->name('all.blog.category');
+    });
+
 });
+
+// Out of any middleware
+Route::get('/team', [FrontendController::class, 'OurTeam'])->name('our.team');
+Route::get('/about', [FrontendController::class, 'AboutUs'])->name('about.us');

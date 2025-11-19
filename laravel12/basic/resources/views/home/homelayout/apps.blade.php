@@ -9,7 +9,7 @@
           <div class="lonyo-cta-thumb" data-aos="fade-up" data-aos-duration="500">
             <img id="appImage" src="{{ asset($app->image)}}" alt="" style="cursor: pointer; with: 100%; max-with:300px;">
             @if (auth()->check())
-                <input type="file" id="uploadImage" style="">
+                <input type="file" id="uploadImage" style="display: none;">
             @endif
           </div>
         </div>
@@ -84,14 +84,14 @@
         let uploadInput = document.getElementById("uploadImage");
 
         imageElement.addEventListener("click", function(){
-            console.log("Cliked.....")
+            console.log("Cliked.....");
             @if (auth()->check())
                 uploadInput.click();
             @endif
         });
 
         uploadInput.addEventListener("change", function(){
-            console.log("Cliked.....")
+            console.log("Cliked.....");
             let file = this.files[0];
 
             if(!file) return;
@@ -105,10 +105,10 @@
                 body: formData
             })
             .then(response => response.json())
-            .then(data = >{
+            .then(data =>{
                 if(data.success) {
                     imageElement.src = data.image_url;
-                    console.log(`Image updated successfully`)
+                    console.log(`Image updated successfully`);
                 }
             })
             .catch(error => console.error("Error: ", error));
