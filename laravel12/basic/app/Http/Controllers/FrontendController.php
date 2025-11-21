@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\About;
+use App\Models\BlogCategory;
+use App\Models\BlogPost;
 use Illuminate\Http\Request;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
@@ -95,4 +97,17 @@ class FrontendController extends Controller
         return redirect()->back()->with($notif);
     }
 
+    public function BlogPage(){
+        $blogCat = BlogCategory::latest()->withCount('posts')->get();
+        $posts = BlogPost::latest()->limit(5)->get();
+        $recentpost = BlogPost::latest()->limit(3)->get();
+        return view('home.blog.blog_list', compact('blogCat', 'posts', 'recentpost'));
+    }
+
+    public function BlogDetails($slug){
+        $blogCat = BlogCategory::latest()->withCount('posts')->get();
+        $post = BlogPost::where('post_slug', $slug)->first();
+        $recentpost = BlogPost::latest()->limit(3)->get();
+        return view('home.blog.blog_details', compact('post', 'blogCat', 'recentpost'));
+    }
 }

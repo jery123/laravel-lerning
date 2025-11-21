@@ -140,6 +140,19 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(BlogController::class)->group(function() {
         Route::get('/blog/category', 'BlogCategory')->name('all.blog.category');
+        Route::post('/store/blog/category', 'StoreBlogCategory')->name('store.blog.category');
+        Route::get('/edit/blog/category/{id}', 'EditBlogCategory');
+        Route::post('/update/blog/category', 'UpdateBlogCategory')->name('update.blog.category');
+        Route::get('/delete/blog/category/{id}', 'DeleteBlogCategory')->name('delete.blog.category');
+    });
+
+    Route::controller(BlogController::class)->group(function() {
+        Route::get('/blog/posts', 'AllBlogPost')->name('all.blog.post');
+        Route::get('/add/blog/posts', 'AddBlogPost')->name('add.blog.post');
+        Route::post('/store/blog/post', 'StoreBlogPost')->name('store.blog.post');
+        Route::get('/edit/blog/post/{id}', 'EditBlogPost')->name('edit.blog.post');
+        Route::post('/update/blog/post', 'UpdateBlogPost')->name('update.blog.post');
+        Route::get('/delete/blog/post/{id}', 'DeleteBlogPost')->name('delete.blog.post');
     });
 
 });
@@ -147,3 +160,5 @@ Route::middleware('auth')->group(function () {
 // Out of any middleware
 Route::get('/team', [FrontendController::class, 'OurTeam'])->name('our.team');
 Route::get('/about', [FrontendController::class, 'AboutUs'])->name('about.us');
+Route::get('/blog', [FrontendController::class, 'BlogPage'])->name('blog.page');
+Route::get('/blog/details/{slug}', [FrontendController::class, 'BlogDetails']);
