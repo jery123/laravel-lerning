@@ -44,7 +44,7 @@
               <h2><a href="single-blog.html">{{ $post->post_title }}</a></h2>
               <p>{!! $post->long_description !!}</p>
             </div>
-              
+
           </div>
         </div>
         <div class="col-lg-4">
@@ -62,7 +62,7 @@
               <div class="lonyo-blog-categorie">
                 <ul>
                     @foreach ($blogCat as $category)
-                        <li><a href="single-blog.html">{{ $category->category_name }} <span>({{ $category->posts_count }})</span></a></li>
+                        <li><a href="{{ url('blog/category/' . $category->id) }}">{{ $category->category_name }} <span>({{ $category->posts_count }})</span></a></li>
                     @endforeach
                 </ul>
               </div>
@@ -84,7 +84,7 @@
                     </div>
                 </a>
               @endforeach
-            </div> 
+            </div>
 
           </div>
         </div>

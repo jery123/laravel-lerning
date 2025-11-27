@@ -30,7 +30,7 @@
       <div class="row">
         <div class="col-lg-8">
 @foreach ($posts as $post)
-    
+
           <div class="lonyo-blog-wrap" data-aos="fade-up" data-aos-duration="700">
             <div class="lonyo-blog-thumb">
               <img src="{{ asset($post->image) }}" alt="">
@@ -39,7 +39,7 @@
               <ul>
                 <li>
                   <a href="single-blog.html"><img src="{{ asset('frontend/assets/images/blog/date.svg') }}" alt="">{{ $post->created_at->format('M d, Y') }}</a>
-                </li> 
+                </li>
               </ul>
             </div>
             <div class="lonyo-blog-content">
@@ -49,7 +49,7 @@
             <div class="lonyo-blog-btn">
               <a href="single-blog.html" class="lonyo-default-btn blog-btn">continue reading</a>
             </div>
-          </div> 
+          </div>
 
 @endforeach
 
@@ -115,7 +115,7 @@
               </a>
               @endforeach
 
-            </div>  
+            </div>
           </div>
         </div>
       </div>

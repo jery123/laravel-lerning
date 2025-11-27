@@ -40,6 +40,9 @@
                 <li>
                   <a href="{{ route('blog.page') }}">Blog</a>
                 </li>
+                <li>
+                  <a href="{{ route('contact.us') }}">Contact</a>
+                </li>
               </ul>
             </nav>
           </div>

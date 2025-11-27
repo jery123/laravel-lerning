@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\About;
 use App\Models\BlogCategory;
 use App\Models\BlogPost;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
@@ -109,5 +110,38 @@ class FrontendController extends Controller
         $post = BlogPost::where('post_slug', $slug)->first();
         $recentpost = BlogPost::latest()->limit(3)->get();
         return view('home.blog.blog_details', compact('post', 'blogCat', 'recentpost'));
+    }
+
+    public function BlogCategory($id) {
+        $blogs = BlogPost::where('blogcat_id', $id)->get();
+        $categoryname = BlogCategory::where('id', $id)->first();
+        $blogCat = BlogCategory::latest()->withCount('posts')->get();
+        $recentpost = BlogPost::latest()->limit(3)->get();
+        return view('home.blog.blog_category', compact('blogs', 'blogCat', 'recentpost', 'categoryname'));
+    }
+
+    public function ContactUs(){
+        return view('home.contact.contact_us');
+    }
+
+    public function ContactMessage(Request $request){
+        Contact::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'message' => $request->message,
+        ]);
+
+        $notification = array(
+            'message' => "Your Message Sent Successfully",
+            'alert-type' => "success"
+        );
+
+        return redirect()->back()->with($notification);
+
+    }
+
+    public function ContactAllMessage(){
+        $messages = Contact::latest()->get();
+        return view('admin.backend.contact.all_message', compact('messages'));
     }
 }
