@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -67,5 +68,34 @@ class AdminController extends Controller
         if (file_exists($oldPhotoPath)) {
             unlink($oldPhotoPath);
         }
+    }
+
+    // update the admin password
+    public function AdminPasswordUpdate(Request $request){
+        $user = Auth::user();
+        $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required|confirmed'
+        ]);
+
+        if(!Hash::check($request->old_password, $user->password)){
+            $notif = array(
+                'message' => "Old Password doesn't natch",
+                'alert-type' => 'error'
+            );
+            return back()->with($notif);
+        }
+
+        User::whereId($user->id)->update([
+            'password' => Hash::make($request->new_password)
+        ]);
+
+        Auth::logout();
+
+        $notif = array(
+                'message' => "Password Updated Successfully",
+                'alert-type' => 'success'
+            );
+        return redirect()->route('login')->with($notif); 
     }
 }
