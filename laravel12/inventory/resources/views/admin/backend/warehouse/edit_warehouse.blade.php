@@ -12,12 +12,12 @@
 
                         <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                             <div class="flex-grow-1">
-                                <h4 class="fs-18 fw-semibold m-0">Add Brand</h4>
+                                <h4 class="fs-18 fw-semibold m-0">Edit Warehouse</h4>
                             </div>
 
                             <div class="text-end">
                                 <ol class="breadcrumb m-0 py-0">
-                                    <li class="breadcrumb-item active">Add Brand</li>
+                                    <li class="breadcrumb-item active">Edit Warehouse</li>
                                 </ol>
                             </div>
                         </div>
@@ -32,20 +32,27 @@
                                     </div><!-- end card header -->
 
                                     <div class="card-body">
-                                        <form class="row g-3" method="POST" action="{{ route('store.brand') }}" enctype="multipart/form-data">
+                                        <form class="row g-3" method="POST" action="{{ route('update.warehouse') }}">
                                             @csrf
-                                            <div class="col-md-12">
-                                                <label for="name" class="form-label">Brand name</label>
-                                                <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required="">
+
+                                            <input type="hidden" name="id" value="{{ $warehouse->id }}">
+                                            <div class="col-md-6">
+                                                <label for="name" class="form-label">Warehouse name</label>
+                                                <input type="text" class="form-control" id="name" name="name" value="{{ $warehouse->name }}" required="">
                                             </div>
                                             <div class="col-md-6">
-                                                <label for="image" class="form-label">Image</label>
-                                                <input type="file" class="form-control" id="image" name="image">
+                                                <label for="email" class="form-label">Warehouse email</label>
+                                                <input type="email" class="form-control" id="email" name="email" value="{{ $warehouse->email }}" required="">
                                             </div>
                                             <div class="col-md-6">
-                                                <label for="image" class="form-label"></label>
-                                                <img src="{{ url('upload/no_image.jpg') }}" class="" id="showImage" width="200px">
+                                                <label for="phone" class="form-label">Warehouse phone</label>
+                                                <input type="text" class="form-control" id="phone" name="phone" value="{{ $warehouse->phone }}" required="">
                                             </div>
+                                            <div class="col-md-6">
+                                                <label for="city" class="form-label">Warehouse city</label>
+                                                <input type="text" class="form-control" id="city" name="city" value="{{ $warehouse->city }}" required="">
+                                            </div>
+
                                             <div class="col-12">
                                                 <button class="btn btn-primary" type="submit">Save Changes</button>
                                             </div>

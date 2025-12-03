@@ -8,12 +8,12 @@
 
                         <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                             <div class="flex-grow-1">
-                                <h4 class="fs-18 fw-semibold m-0">All Brands</h4>
+                                <h4 class="fs-18 fw-semibold m-0">All Warehouses</h4>
                             </div>
 
                             <div class="text-end">
                                 <ol class="breadcrumb m-0 py-0">
-                                    <a href="{{ route('add.brand') }}" class="btn btn-primary">Add Brand</a>
+                                    <a href="{{ route('add.warehouse') }}" class="btn btn-primary">Add Warehouse</a>
                                 </ol>
                             </div>
                         </div>
@@ -24,7 +24,7 @@
                                 <div class="card">
 
                                     <div class="card-header">
-                                        <h5 class="card-title mb-0">All Brands</h5>
+                                        <h5 class="card-title mb-0">All Warehouses</h5>
                                     </div><!-- end card header -->
 
                                     <div class="card-body">
@@ -32,22 +32,24 @@
                                             <thead>
                                             <tr>
                                                 <th>S.I</th>
-                                                <th>Brand Name</th>
-                                                <th>Image</th>
+                                                <th>Warehouse Name</th>
+                                                <th>E-mail</th>
+                                                <th>Phone</th>
+                                                <th>City</th>
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($brands as $key => $brand)
+                                                @foreach ($warehouses as $key => $warehouse)
                                                     <tr>
                                                         <td>{{ $key + 1 }}</td>
-                                                        <td>{{ $brand->name }}</td>
+                                                        <td>{{ $warehouse->name }}</td>
+                                                        <td>{{ $warehouse->email }}</td>
+                                                        <td>{{ $warehouse->phone }}</td>
+                                                        <td>{{ $warehouse->city }}</td>
                                                         <td>
-                                                            <img src="{{ asset($brand->image) }}" style="width: 70px; height:40px;">
-                                                        </td>
-                                                        <td>
-                                                            <a href="{{ route('edit.brand', $brand->id) }}" class="btn btn-info sm" title="Edit Data">Edit</a>
-                                                            <a href="{{ route('delete.brand', $brand->id) }}" class="btn btn-danger sm" title="Delete Data" id="delete">Delete</a>
+                                                            <a href="{{ route('edit.warehouse', $warehouse->id) }}" class="btn btn-info sm" title="Edit Data">Edit</a>
+                                                            <a href="{{ route('delete.warehouse', $warehouse->id) }}" class="btn btn-danger sm" title="Delete Data" id="delete">Delete</a>
                                                         </td>
                                                     </tr>
                                                 @endforeach
