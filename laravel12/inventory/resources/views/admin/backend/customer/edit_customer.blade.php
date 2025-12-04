@@ -2,9 +2,6 @@
 @section('content')
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-
 <div class="content">
 
                     <!-- Start Content-->
@@ -12,12 +9,12 @@
 
                         <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                             <div class="flex-grow-1">
-                                <h4 class="fs-18 fw-semibold m-0">Add Warehouse</h4>
+                                <h4 class="fs-18 fw-semibold m-0">Edit Customer</h4>
                             </div>
 
                             <div class="text-end">
                                 <ol class="breadcrumb m-0 py-0">
-                                    <li class="breadcrumb-item active">Add Warehouse</li>
+                                    <li class="breadcrumb-item active">Edit Customer</li>
                                 </ol>
                             </div>
                         </div>
@@ -32,33 +29,34 @@
                                     </div><!-- end card header -->
 
                                     <div class="card-body">
-                                        <form class="row g-3" method="POST" action="{{ route('store.warehouse') }}" enctype="multipart/form-data">
+                                        <form class="row g-3" method="POST" action="{{ route('update.customer') }}" enctype="multipart/form-data">
                                             @csrf
-                                            <div class="col-md-6">
-                                                <label for="name" class="form-label">Warehouse name</label>
-                                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" required="">
+                                            <input name="id" value="{{ $customer->id }}" type="hidden">
+                                            <div class="col-md-4">
+                                                <label for="name" class="form-label">Customer name</label>
+                                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ $customer->name }}" required="">
                                                 @error('name')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
-                                            <div class="col-md-6">
-                                                <label for="email" class="form-label">Warehouse email</label>
-                                                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required="">
+                                            <div class="col-md-4">
+                                                <label for="email" class="form-label">Customer email</label>
+                                                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ $customer->email }}" required="">
                                                 @error('email')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
-                                            <div class="col-md-6">
-                                                <label for="phone" class="form-label">Warehouse phone</label>
-                                                <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" value="{{ old('phone') }}" required="">
+                                            <div class="col-md-4">
+                                                <label for="phone" class="form-label">Customer phone</label>
+                                                <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" value="{{ $customer->phone }}" required="">
                                                 @error('phone')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
-                                            <div class="col-md-6">
-                                                <label for="city" class="form-label">Warehouse city</label>
-                                                <input type="text" class="form-control @error('city') is-invalid @enderror" id="city" name="city" value="{{ old('city') }}" required="">
-                                                @error('city')
+                                            <div class="col-md-12">
+                                                <label for="address" class="form-label">Customer Address</label>
+                                                <textarea class="form-control @error('address') is-invalid @enderror" id="address" name="address" required="">{{ $customer->address }}</textarea>
+                                                @error('address')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
@@ -76,6 +74,5 @@
                     </div> <!-- container-fluid -->
 
                 </div>
-
 
 @endsection

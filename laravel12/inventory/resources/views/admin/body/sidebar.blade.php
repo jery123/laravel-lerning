@@ -64,6 +64,50 @@
                                     </ul>
                                 </div>
                             </li>
+                            <li>
+                                <a href="#Supplier" data-bs-toggle="collapse">
+                                    <i data-feather="users"></i>
+                                    <span> Supplier Manage </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="Supplier">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('all.supplier') }}" class="tp-link">All Suppliers</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            
+                            <li>
+                                <a href="#Customer" data-bs-toggle="collapse">
+                                    <i data-feather="users"></i>
+                                    <span> Customer Manage </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="Customer">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('all.customer') }}" class="tp-link">All Customers</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            
+                            <li>
+                                <a href="#Product" data-bs-toggle="collapse">
+                                    <i data-feather="users"></i>
+                                    <span> Product Manage </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="Product">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('all.product.categories') }}" class="tp-link">All Product Categories</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
 
                             <li>
                                 <a href="#sidebarError" data-bs-toggle="collapse">

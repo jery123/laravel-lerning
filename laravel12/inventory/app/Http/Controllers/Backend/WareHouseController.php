@@ -21,11 +21,18 @@ class WareHouseController extends Controller
 
     public function StoreWareHouse(Request $request){
 
+        $validatedData = $request->validate([
+            'name' => 'required|unique:ware_houses|max:255',
+            'email' => 'nullable|email|unique:ware_houses,email|max:255',
+            'phone' => 'nullable|max:20',
+            'city' => 'nullable',
+        ]);
+
             WareHouse::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'phone' => $request->phone,
-                'city' => $request->city,
+                'name' => $validatedData['name'],
+                'email' => $validatedData['email'],
+                'phone' => $validatedData['phone'],
+                'city' => $validatedData['city'],
             ]);
 
             $notification = array(
@@ -45,12 +52,20 @@ class WareHouseController extends Controller
     // Update Warehouse
     public function UpdateWarehouse(Request $request){
         $warehouse_id = $request->id;
+
+        $validatedData = $request->validate([
+            'name' => 'required|max:255|unique:ware_houses,name,'.$warehouse_id,
+            'email' => 'nullable|email|unique:ware_houses,email,'.$warehouse_id.'|max:255',
+            'phone' => 'nullable|max:20',
+            'city' => 'nullable',
+        ]);
+
         $warehouse = WareHouse::findOrFail($warehouse_id);
         $warehouse->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'city' => $request->city,
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'phone' => $validatedData['phone'],
+            'city' => $validatedData['city'],
         ]);
         $notif = array(
             'message' => 'Warehouse Updated Successfully',

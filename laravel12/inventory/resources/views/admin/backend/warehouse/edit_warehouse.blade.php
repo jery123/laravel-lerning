@@ -38,19 +38,39 @@
                                             <input type="hidden" name="id" value="{{ $warehouse->id }}">
                                             <div class="col-md-6">
                                                 <label for="name" class="form-label">Warehouse name</label>
-                                                <input type="text" class="form-control" id="name" name="name" value="{{ $warehouse->name }}" required="">
+                                                <input type="text" class="form-control @error('name')
+                                                    is-invalid
+                                                @enderror" id="name" name="name" value="{{ $warehouse->name }}" required="">
+                                                @error('name')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="email" class="form-label">Warehouse email</label>
-                                                <input type="email" class="form-control" id="email" name="email" value="{{ $warehouse->email }}" required="">
+                                                <input type="email" class="form-control @error('email')
+                                                    is-invalid
+                                                @enderror" id="email" name="email" value="{{ $warehouse->email }}" required="">
+                                             @error('email')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="phone" class="form-label">Warehouse phone</label>
-                                                <input type="text" class="form-control" id="phone" name="phone" value="{{ $warehouse->phone }}" required="">
+                                                <input type="text" class="form-control @error('phone')
+                                                    is-invalid
+                                                @enderror" id="phone" name="phone" value="{{ $warehouse->phone }}" required="">
+                                             @error('phone')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="city" class="form-label">Warehouse city</label>
-                                                <input type="text" class="form-control" id="city" name="city" value="{{ $warehouse->city }}" required="">
+                                                <input type="text" class="form-control @error('city')
+                                                    is-invalid
+                                                @enderror" id="city" name="city" value="{{ $warehouse->city }}" required="">
+                                             @error('city')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
                                             </div>
 
                                             <div class="col-12">
