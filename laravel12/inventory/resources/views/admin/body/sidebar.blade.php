@@ -103,7 +103,10 @@
                                 <div class="collapse" id="Product">
                                     <ul class="nav-second-level">
                                         <li>
-                                            <a href="{{ route('all.product.categories') }}" class="tp-link">All Product Categories</a>
+                                            <a href="{{ route('all.product.categories') }}" class="tp-link">All Categories</a>
+                                        </li>
+                                          <li>
+                                            <a href="{{ route('all.product') }}" class="tp-link">All Products</a>
                                         </li>
                                     </ul>
                                 </div>
