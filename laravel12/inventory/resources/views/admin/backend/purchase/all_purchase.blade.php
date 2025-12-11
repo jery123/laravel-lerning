@@ -8,12 +8,12 @@
 
                         <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                             <div class="flex-grow-1">
-                                <h4 class="fs-18 fw-semibold m-0">All Products</h4>
+                                <h4 class="fs-18 fw-semibold m-0">All Purchases</h4>
                             </div>
 
                             <div class="text-end">
                                 <ol class="breadcrumb m-0 py-0">
-                                    <a href="{{ route('add.product') }}" class="btn btn-primary">Add Product</a>
+                                    <a href="{{ route('add.purchase') }}" class="btn btn-primary">Add Purchase</a>
                                 </ol>
                             </div>
                         </div>
@@ -32,36 +32,23 @@
                                             <thead>
                                             <tr>
                                                 <th>S.I</th>
-                                                <th>Image</th>
-                                                <th>Name</th>
-                                                <th>Warehouse</th>
-                                                <th>Price</th>
-                                                <th>In Stock</th>
+                                                <th>WareHouse</th>
+                                                <th>Status</th>
+                                                <th>Grand Total</th>
+                                                <th>Payement</th>
+                                                <th>Created At</th>
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($products as $key => $product)
+                                                @foreach ($purchases as $key => $purchase)
                                                     <tr>
                                                         <td>{{ $key + 1 }}</td>
-                                                        <td>
-                                                            @php
-                                                                $primaryImage = $product->images->first()->name ?? 'no_image.jpg';
-                                                            @endphp
-                                                            <img src="{{ asset($primaryImage) }}" alt="Product Image" style="width: 50px; height: 50px;">
-                                                        </td>
-                                                        <td>{{ Str::limit($product->name, 30, '...') }}</td>
-                                                        <td>{{ $product->warehouse->name ?? 'N/A' }}</td>
-                                                        <td>{{ $product->price }}</td>
-                                                        <td>
-                                                            @if($product->product_qty <=3)
-                                                                <span class="badge text-bg-danger">{{ $product->product_qty }}</span>
-                                                                @else
-                                                                <h4>
-                                                                    <span class="badge text-bg-secondary">{{ $product->product_qty }}</span>
-                                                                </h4>
-                                                            @endif
-                                                        </td>
+                                                        <td>{{ $purchase->warehouse_id ?? 'N/A' }}</td>
+                                                        <td>{{ $purchase->status }}</td>
+                                                        <td>$ {{ $purchase->grand_total }}</td>
+                                                        <td>Cash</td>
+                                                        <td>{{ \Carbon\Carbon::parse($purchase->created_at)->format('Y-m-d') }}</td>
                                                         <td>
                                                             <a href="{{ route('details.product', $product->id) }}" class="btn btn-info sm" title="Details">
                                                                 <span class="mdi mdi-eye-circle mdi-18px"></span>

@@ -78,7 +78,7 @@
                                     </ul>
                                 </div>
                             </li>
-                            
+
                             <li>
                                 <a href="#Customer" data-bs-toggle="collapse">
                                     <i data-feather="users"></i>
@@ -93,7 +93,7 @@
                                     </ul>
                                 </div>
                             </li>
-                            
+
                             <li>
                                 <a href="#Product" data-bs-toggle="collapse">
                                     <i data-feather="users"></i>
@@ -107,6 +107,24 @@
                                         </li>
                                           <li>
                                             <a href="{{ route('all.product') }}" class="tp-link">All Products</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li>
+                                <a href="#Purchase" data-bs-toggle="collapse">
+                                    <i data-feather="users"></i>
+                                    <span> Purchase Manage </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="Purchase">
+                                    <ul class="nav-second-level">
+                                        <li>
+                                            <a href="{{ route('all.purchase') }}" class="tp-link">All Purchases</a>
+                                        </li>
+                                          <li>
+                                            <a href="{{ route('all.purchase.return') }}" class="tp-link">Purchase Return</a>
                                         </li>
                                     </ul>
                                 </div>

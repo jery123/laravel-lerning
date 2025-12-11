@@ -180,7 +180,7 @@ class ProductController extends Controller
                 ]);
             }
         }
-        
+
         if($request->has('remove_image')){
             foreach($request->remove_image as $removeImageId){
                 $image = ProductImage::findOrFail($removeImageId);
@@ -197,5 +197,32 @@ class ProductController extends Controller
         );
 
         return redirect()->route('all.product')->with($notification);
+    }
+
+    public function DeleteProduct($id){
+        $product = Product::findOrFail($id);
+
+        $images = ProductImage::where('product_id', $id)->get();
+        foreach($images as $img){
+            if(file_exists(public_path($img->name))){
+                unlink(public_path($img->name));
+            }
+            $img->delete();
+        }
+
+        $product->delete();
+
+        $notification = array(
+            'message' => 'Product Deleted Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+    }
+
+    public function DetailsProduct($id){
+        $product = Product::findOrFail($id);
+        $images = ProductImage::where('product_id', $id)->get();
+        return view('admin.backend.product.details_product', compact('product', 'images'));
     }
 }
